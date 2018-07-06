@@ -73,18 +73,5 @@ public sealed class MainBootStrap
 
         BulletLook.mesh = settings.GetComponent<BulletSettings>().BulletMesh;
         BulletLook.material = settings.GetComponent<BulletSettings>().BulletMaterial;
-
-        //TowerLook = GetLookFromPrototype("Tower");
-        //CreepLook = GetLookFromPrototype("Creep");
-        //BulletLook = GetLookFromPrototype("Bullet");
-    }
-
-    static MeshInstanceRenderer GetLookFromPrototype(string name)
-    {
-        var proto = GameObject.Find(name);
-        var result = proto.GetComponent<MeshInstanceRendererComponent>().Value;
-        Object.Destroy(proto);
-        return result;
-
     }
 }
