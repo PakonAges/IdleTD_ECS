@@ -9,6 +9,7 @@ public sealed class MainBootStrap
     public static EntityArchetype TowerArchetype;
     public static EntityArchetype CreepArchetype;
     public static EntityArchetype BulletArchetype;
+    public static EntityArchetype WayPointArchetype;
 
     public static MeshInstanceRenderer TowerLook;
     public static MeshInstanceRenderer CreepLook;
@@ -32,14 +33,20 @@ public sealed class MainBootStrap
             typeof(Position),
             typeof(Rotation),
             typeof(TransformMatrix),
-            typeof(MeshInstanceRenderer));
+            typeof(MeshInstanceRenderer),
+            typeof(MoveTarget));
 
         BulletArchetype = entityManager.CreateArchetype(
             typeof(Bullet),
             typeof(Position),
             typeof(Rotation),
             typeof(TransformMatrix),
-            typeof(MeshInstanceRenderer));
+            typeof(MeshInstanceRenderer),
+            typeof(MoveTarget));
+
+        WayPointArchetype = entityManager.CreateArchetype(
+            typeof(WayPoint),
+            typeof(Position));
     }
 
     public static void NewGame() 
@@ -58,6 +65,11 @@ public sealed class MainBootStrap
         Entity bullet = entityManager.CreateEntity(BulletArchetype);
         entityManager.SetComponentData(bullet, new Position { Value = new float3(2.0f, 0.0f, 0.0f) });
         entityManager.SetSharedComponentData(bullet, BulletLook);
+
+        Entity wp1 = entityManager.CreateEntity(WayPointArchetype);
+        entityManager.SetComponentData(wp1, new Position { Value = new float3(10.0f, 0.0f, 0.0f) });
+        Entity wp2 = entityManager.CreateEntity(WayPointArchetype);
+        entityManager.SetComponentData(wp2, new Position { Value = new float3(20.0f, 0.0f, 0.0f) });
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
