@@ -2,5 +2,5 @@
 
 public struct NeedMoveTarget : IComponentData
 {
-    public bool Value;
+    public Bool Value;
 }

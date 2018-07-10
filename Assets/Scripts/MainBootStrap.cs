@@ -34,6 +34,7 @@ public sealed class MainBootStrap
             typeof(Rotation),
             typeof(TransformMatrix),
             typeof(MeshInstanceRenderer),
+            typeof(NeedMoveTarget),
             typeof(MoveTarget));
 
         BulletArchetype = entityManager.CreateArchetype(
@@ -42,6 +43,7 @@ public sealed class MainBootStrap
             typeof(Rotation),
             typeof(TransformMatrix),
             typeof(MeshInstanceRenderer),
+            typeof(NeedMoveTarget),
             typeof(MoveTarget));
 
         WayPointArchetype = entityManager.CreateArchetype(
@@ -59,11 +61,13 @@ public sealed class MainBootStrap
 
         Entity creep = entityManager.CreateEntity(CreepArchetype);
         entityManager.SetComponentData(creep, new Position { Value = new float3(0.0f, 0.0f, 0.0f) });
+        entityManager.SetComponentData(creep, new NeedMoveTarget { Value = true });
         entityManager.SetSharedComponentData(creep, CreepLook);
 
 
         Entity bullet = entityManager.CreateEntity(BulletArchetype);
         entityManager.SetComponentData(bullet, new Position { Value = new float3(2.0f, 0.0f, 0.0f) });
+        entityManager.SetComponentData(bullet, new NeedMoveTarget { Value = true });
         entityManager.SetSharedComponentData(bullet, BulletLook);
 
         Entity wp1 = entityManager.CreateEntity(WayPointArchetype);
