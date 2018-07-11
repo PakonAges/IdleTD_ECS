@@ -35,7 +35,8 @@ public sealed class MainBootStrap
             typeof(TransformMatrix),
             typeof(MeshInstanceRenderer),
             typeof(NeedMoveTarget),
-            typeof(MoveTarget));
+            typeof(MoveTarget),
+            typeof(MoveSpeed));
 
         BulletArchetype = entityManager.CreateArchetype(
             typeof(Bullet),
@@ -44,7 +45,8 @@ public sealed class MainBootStrap
             typeof(TransformMatrix),
             typeof(MeshInstanceRenderer),
             typeof(NeedMoveTarget),
-            typeof(MoveTarget));
+            typeof(MoveTarget),
+             typeof(MoveSpeed));
 
         WayPointArchetype = entityManager.CreateArchetype(
             typeof(WayPoint),
@@ -62,18 +64,20 @@ public sealed class MainBootStrap
         Entity creep = entityManager.CreateEntity(CreepArchetype);
         entityManager.SetComponentData(creep, new Position { Value = new float3(0.0f, 0.0f, 0.0f) });
         entityManager.SetComponentData(creep, new NeedMoveTarget { Value = true });
+        entityManager.SetComponentData(creep, new MoveSpeed { speed = 5.0f });
         entityManager.SetSharedComponentData(creep, CreepLook);
 
 
         Entity bullet = entityManager.CreateEntity(BulletArchetype);
         entityManager.SetComponentData(bullet, new Position { Value = new float3(2.0f, 0.0f, 0.0f) });
         entityManager.SetComponentData(bullet, new NeedMoveTarget { Value = true });
+        entityManager.SetComponentData(bullet, new MoveSpeed { speed = 20.0f });
         entityManager.SetSharedComponentData(bullet, BulletLook);
 
         Entity wp1 = entityManager.CreateEntity(WayPointArchetype);
-        entityManager.SetComponentData(wp1, new Position { Value = new float3(10.0f, 0.0f, 0.0f) });
+        entityManager.SetComponentData(wp1, new Position { Value = new float3(20.0f, 0.0f, 0.0f) });
         Entity wp2 = entityManager.CreateEntity(WayPointArchetype);
-        entityManager.SetComponentData(wp2, new Position { Value = new float3(20.0f, 0.0f, 0.0f) });
+        entityManager.SetComponentData(wp2, new Position { Value = new float3(-20.0f, 0.0f, 0.0f) });
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
